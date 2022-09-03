@@ -31,7 +31,7 @@
 
         #siteTitle{
 
-            font-size: 2rem;
+            font-size: 3rem;
 
         }
 
@@ -144,6 +144,26 @@
            
         }
 
+        /* Tooltips */
+
+        .ui-tooltip {
+            text-align: center;
+            color: rgb(117, 95, 215);
+            max-width: 200px;
+     }
+
+     .ui-tooltip-content {
+            z-index: 1;
+            text-align: center;
+            background-color: rgb(46,46,46);
+            padding: 1rem;
+
+     }
+       
+       
+
+
+        /* End tooltips */
 
     </style>
 
@@ -152,37 +172,39 @@
 
     <div id="header">
 
-        <div id="siteTitle">MindMapper</div>
+        <!-- Tooltips are simply added to the title properties -->
+
+        <div id="siteTitle" title="Click on the plus button to add new elements. Shift click on an element to add a connecting line to it.">MindMapper</div>
         <!-- <div id="instructions">Shift + click on a circle to add a connecting line</div>
  -->
-        <a href="#"><div class="plus">+</div></a>
+        <a href="#" title="Click here to add new elements."><div class="plus">+</div></a>
         <div id="ui">
             <div class="uiElem">
-                <p>CIRCLE SIZE</p>
+                <p title="Change the size of the selected element">CIRCLE SIZE</p>
                 <input type="range" min="25" max="1000" value="200" name="circlesize" id="circlesize">
             </div>
             <div class="uiElem">
-                <p>PICK COLOR</p>
+                <p title="Change the color of the selected element">PICK COLOR</p>
                 <input type="color" id="circleColor" name="circleColor" value="#DC143C">
             </div>
             <div id="stylebrush" class="uiElem">
-                <p>CLONE STYLE</p>
+                <p title="Copy the style of the selected element to other elements by clicking on them with this tool">CLONE STYLE</p>
                 <img src="iconmonstr-paintbrush-3-64.png" width="32px" alt="">
             </div>
             <div id="eraser" class="uiElem">
-                <p>ERASE</p>
+                <p title="Erase circles or lines by clicking on them with this tool">ERASE</p>
                 <img src="iconmonstr-eraser-1-48.png" width="32" alt="">
             </div>
             <div id="print" class="uiElem">
-                <p>PRINT PAGE</p>
+                <p title="Print the mindmap you have created">PRINT PAGE</p>
                 <img src="iconmonstr-printer-5-32.png" width="32" alt="">
             </div>
             <div id="save" class="uiElem">
-                <p>SAVE PAGE</p>
+                <p title="Save the mindmap to browser localstorage so that a page refresh won't delete it">SAVE PAGE</p>
                 <img src="iconmonstr-save-3-32.png" width="32" alt="">
             </div>
             <div id="delete" class="uiElem">
-                <p>DELETE SAVE</p>
+                <p title="Delete the saved mindmap from localstorage.">DELETE SAVE</p>
                 <img src="iconmonstr-x-mark-6-32.png" width="32" alt="">
             </div>
         </div>
@@ -212,6 +234,14 @@
         let selectedColor = '#DC143C';
         let selectedFontSize = "1rem";
 
+        //Needed for tooltips to work:
+        $(function () {
+                $(document).tooltip({ //track will make the tooltip follow the mouse curser location
+                     track: true   
+                }
+
+            )
+        });
 
         $('.circleWrap').draggable({
             drag: function (event, ui) {
